@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 # Get the current working directory
 CWD=$(pwd)
 
@@ -19,12 +19,12 @@ ENVS=$(yq -j .envs $YAML_FILE | jq -r '.[]')
 SERVICES=$(yq -j .services $YAML_FILE | jq -r '.[]')
 
 # Print the values
-echo "Release: $RELEASE"
-echo "Environments: $ENVS"
+echo "Release Version: $RELEASE"
 # Loop through the list of environments
 for ENV in $ENVS; do
   # Perform actions on each environment
   echo "Processing environment: $ENV"
+  printf "\n"
   # Loop through the list of services
   for SERVICE in $SERVICES; do
     # Perform actions on each service
@@ -41,6 +41,7 @@ for ENV in $ENVS; do
         echo "Current Tag: $CURRENT_TAG"
         echo "Release Verison: $RELEASE"
         sed -i "s/$CURRENT_TAG/$RELEASE/g" "$dir/values.yaml"
+        printf "\n"
     done
   done
 done
