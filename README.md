@@ -8,19 +8,11 @@ reads a YAML file and extracts the values of the release, envs, and services key
 
 **Required** Release Version
 
-### `environment`
-
-**Required** Environment Name
-
 ## Outputs
 
 ### `release_version`
 
 **Required** Release Version
-
-### `environment`
-
-**Required** Environment Name
 
 ###
 ```- name: Release Versions
@@ -28,5 +20,4 @@ reads a YAML file and extracts the values of the release, envs, and services key
    id: release_versions
    with:
      release_version: ${release_version}
-     environment: ${environment}
 ```
