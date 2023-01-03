@@ -37,10 +37,23 @@ for ENV in $ENVS; do
         # For example, you can update a YAML file or run a command
         # Extract the tag value
         CURRENT_TAG=$(yq -r .image.tag $dir/values.yaml)
-        # Print the value
+
+        # Print the values
         echo "Current Tag: $CURRENT_TAG"
         echo "Release Verison: $RELEASE"
-        sed -i "s/$CURRENT_TAG/$RELEASE/g" "$dir/values.yaml"
+
+        # Add an if condition to compare the values
+        if [ "$CURRENT_TAG" != "$RELEASE" ]; then
+          # Perform some action if the values are not equal
+          echo "updating $SERVICE version from $CURRENT_TAG to $RELEASE."
+          # Perform the sed command
+          sed -i "s/$CURRENT_TAG/$RELEASE/g" "$dir/values.yaml"
+        else
+          # Perform some action if the values are equal
+          echo "Values are equal. No action needed."
+        fi
+
+        # Add a blank line after the if condition
         printf "\n"
     done
   done
