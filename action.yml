@@ -1,0 +1,17 @@
+name: Github Actions to release versions
+description: release service versions using github action
+inputs:
+  release_version:
+    description: Release Version
+    required: true
+  environment:
+    description: Environment Name
+    required: true
+outputs:
+  release_version:
+    description: Release Version
+  environment:
+    description: Environment Name
+runs:
+  using: docker
+  image: Dockerfile
